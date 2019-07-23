@@ -1,4 +1,4 @@
-export type Fn = () => Promise<any>
+export type Fn<T = any> = () => Promise<T>
 export type ResolveFn = (res: any) => void
 
 export interface Call {
@@ -9,8 +9,8 @@ export interface Call {
 export class Singleflight {
   private singleFlightQueue = new Map<string, Call>()
 
-  do(key: string, fn: Fn): Promise<any> {
-    const promise = new Promise((resolve, reject) => {
+  do<T = any>(key: string, fn: Fn<T>): Promise<T> {
+    const promise: Promise<T> = new Promise((resolve, reject) => {
       const call: Call = this.singleFlightQueue.get(key) || {
         resolveFns: [],
         rejectFns: []
