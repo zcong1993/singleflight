@@ -1,6 +1,6 @@
 # singleflight
 
-[![NPM version](https://img.shields.io/npm/v/@zcong/singleflight.svg?style=flat)](https://npmjs.com/package/@zcong/singleflight) [![NPM downloads](https://img.shields.io/npm/dm/@zcong/singleflight.svg?style=flat)](https://npmjs.com/package/@zcong/singleflight) [![CircleCI](https://circleci.com/gh/zcong1993/singleflight/tree/master.svg?style=shield)](https://circleci.com/gh/zcong1993/singleflight/tree/master) [![codecov](https://codecov.io/gh/zcong1993/singleflight/branch/master/graph/badge.svg)](https://codecov.io/gh/zcong1993/singleflight)
+[![NPM version](https://img.shields.io/npm/v/@zcong/singleflight.svg?style=flat)](https://npmjs.com/package/@zcong/singleflight) [![NPM downloads](https://img.shields.io/npm/dm/@zcong/singleflight.svg?style=flat)](https://npmjs.com/package/@zcong/singleflight) [![JS Test](https://github.com/zcong1993/singleflight/actions/workflows/js-test.yml/badge.svg)](https://github.com/zcong1993/singleflight/actions/workflows/js-test.yml) [![codecov](https://codecov.io/gh/zcong1993/singleflight/branch/master/graph/badge.svg)](https://codecov.io/gh/zcong1993/singleflight)
 
 > singleflight for js
 
