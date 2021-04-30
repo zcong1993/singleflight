@@ -11,35 +11,51 @@ let resolveInstance: Promise<void>
 export class Singleflight {
   private singleFlightQueue = new Map<string, Call>()
 
-  do<T = any>(key: string, fn: Fn<T>): Promise<T> {
-    const promise: Promise<T> = new Promise((resolve, reject) => {
-      const call: Call = this.singleFlightQueue.get(key) || {
-        resolveFns: [],
-        rejectFns: []
-      }
+  async do<T = any>(key: string, fn: Fn<T>): Promise<T> {
+    const [res] = await this.doWithFresh(key, fn)
+    return res
+  }
 
-      call.resolveFns.push(resolve)
-      call.rejectFns.push(reject)
-      this.singleFlightQueue.set(key, call)
-      if (call.resolveFns.length === 1) {
-        if (!resolveInstance) {
-          resolveInstance = Promise.resolve()
+  async doWithFresh<T = any>(
+    key: string,
+    fn: Fn<T>
+  ): Promise<[data: T, fresh: boolean]> {
+    const promise: Promise<[data: T, fresh: boolean]> = new Promise(
+      (resolve, reject) => {
+        const call: Call = this.singleFlightQueue.get(key) || {
+          resolveFns: [],
+          rejectFns: [],
         }
-        // ensure always work even fn is sync function
-        resolveInstance
-          .then(() => fn())
-          .then(res => {
-            const waitCall = this.singleFlightQueue.get(key)
-            waitCall.resolveFns.forEach(resolve => resolve(res))
-            this.singleFlightQueue.delete(key)
-          })
-          .catch(err => {
-            const waitCall = this.singleFlightQueue.get(key)
-            waitCall.rejectFns.forEach(reject => reject(err))
-            this.singleFlightQueue.delete(key)
-          })
+
+        call.resolveFns.push(resolve)
+        call.rejectFns.push(reject)
+        this.singleFlightQueue.set(key, call)
+        if (call.resolveFns.length === 1) {
+          if (!resolveInstance) {
+            resolveInstance = Promise.resolve()
+          }
+          // ensure always work even fn is sync function
+          resolveInstance
+            .then(() => fn())
+            .then((res) => {
+              const waitCall = this.singleFlightQueue.get(key)
+              waitCall.resolveFns.forEach((resolve, i) => {
+                if (i === 0) {
+                  resolve([res, true])
+                } else {
+                  resolve([res, false])
+                }
+              })
+              this.singleFlightQueue.delete(key)
+            })
+            .catch((err) => {
+              const waitCall = this.singleFlightQueue.get(key)
+              waitCall.rejectFns.forEach((reject) => reject(err))
+              this.singleFlightQueue.delete(key)
+            })
+        }
       }
-    })
+    )
 
     return promise
   }
