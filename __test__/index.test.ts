@@ -77,3 +77,28 @@ it('doWithFresh should works well', async () => {
     expect(r[1]).toBe(i === 0)
   })
 })
+
+it('symbol key should work well', async () => {
+  const mockRes = 'mock res'
+  const fn = jest.fn().mockResolvedValue(mockRes)
+  const fnSync = jest.fn().mockReturnValue(mockRes)
+
+  const sf = new Singleflight()
+
+  const testKey = Symbol.for('testKey')
+  const testSyncKey = Symbol.for('testSyncKey')
+
+  Promise.all(
+    Array(10)
+      .fill(null)
+      .map(() => sf.do(testKey, fn).then((res) => expect(res).toBe(mockRes)))
+  ).then(() => expect(fn).toBeCalledTimes(1))
+
+  Promise.all(
+    Array(10)
+      .fill(null)
+      .map(() =>
+        sf.do(testSyncKey, fnSync).then((res) => expect(res).toBe(mockRes))
+      )
+  ).then(() => expect(fnSync).toBeCalledTimes(1))
+})

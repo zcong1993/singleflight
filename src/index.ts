@@ -1,6 +1,8 @@
 export type Fn<T = any> = () => T | Promise<T>
 export type ResolveFn = (res: any) => void
 
+export type KeyType = string | symbol
+
 export interface Call {
   resolveFns: ResolveFn[]
   rejectFns: ResolveFn[]
@@ -9,15 +11,15 @@ export interface Call {
 let resolveInstance: Promise<void>
 
 export class Singleflight {
-  private singleFlightQueue = new Map<string, Call>()
+  private singleFlightQueue = new Map<KeyType, Call>()
 
-  async do<T = any>(key: string, fn: Fn<T>): Promise<T> {
+  async do<T = any>(key: KeyType, fn: Fn<T>): Promise<T> {
     const [res] = await this.doWithFresh(key, fn)
     return res
   }
 
   async doWithFresh<T = any>(
-    key: string,
+    key: KeyType,
     fn: Fn<T>
   ): Promise<[data: T, fresh: boolean]> {
     const promise: Promise<[data: T, fresh: boolean]> = new Promise(
