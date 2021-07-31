@@ -7,6 +7,10 @@ jobs:
   build:
     name: Release
     timeout-minutes: 10
+    permissions:
+      packages: write
+      contents: write
+      issues: write
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true && startsWith(github.head_ref, 'releases/v')
     steps:
