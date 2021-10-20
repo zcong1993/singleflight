@@ -7,13 +7,13 @@ it('should work well', async () => {
 
   const sf = new Singleflight()
 
-  Promise.all(
+  await Promise.all(
     Array(10)
       .fill(null)
       .map(() => sf.do('test', fn).then((res) => expect(res).toBe(mockRes)))
   ).then(() => expect(fn).toBeCalledTimes(1))
 
-  Promise.all(
+  await Promise.all(
     Array(10)
       .fill(null)
       .map(() =>
@@ -25,21 +25,23 @@ it('should work well', async () => {
 it('all should got error', async () => {
   const mockErr = new Error('mock error')
   const fn = jest.fn().mockRejectedValue(mockErr)
-  const fnSync = jest.fn().mockImplementation(() => mockErr)
+  const fnSync = jest.fn().mockImplementation(() => {
+    throw mockErr
+  })
 
   const sf = new Singleflight()
 
-  Promise.all(
+  await Promise.all(
     Array(10)
       .fill(null)
-      .map(() => sf.do('test', fn).catch((err) => expect(err).toBe(mockErr)))
+      .map(() => expect(() => sf.do('test', fn)).rejects.toThrowError(mockErr))
   ).then(() => expect(fn).toBeCalledTimes(1))
 
-  Promise.all(
+  await Promise.all(
     Array(10)
       .fill(null)
       .map(() =>
-        sf.do('testSync', fnSync).catch((err) => expect(err).toBe(mockErr))
+        expect(() => sf.do('testSync', fnSync)).rejects.toThrowError(mockErr)
       )
   ).then(() => expect(fnSync).toBeCalledTimes(1))
 })
@@ -88,13 +90,13 @@ it('symbol key should work well', async () => {
   const testKey = Symbol.for('testKey')
   const testSyncKey = Symbol.for('testSyncKey')
 
-  Promise.all(
+  await Promise.all(
     Array(10)
       .fill(null)
       .map(() => sf.do(testKey, fn).then((res) => expect(res).toBe(mockRes)))
   ).then(() => expect(fn).toBeCalledTimes(1))
 
-  Promise.all(
+  await Promise.all(
     Array(10)
       .fill(null)
       .map(() =>

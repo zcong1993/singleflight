@@ -1,59 +1,53 @@
 {
   "name": "@zcong/singleflight",
   "version": "0.3.0",
-  "description": "my cool project",
+  "description": "singleflight for js",
   "main": "./dist/index.js",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "scripts": {
     "build": "tsc",
     "test": "npm run lint && npm run jest",
     "test:cov": "npm run lint && npm run jest:cov",
-    "lint": "tslint -p .",
+    "lint": "eslint . --ext .ts",
     "format": "prettier --write '**/*.{ts,json,md}'",
     "jest": "jest --detectOpenHandles --forceExit",
     "jest:cov": "jest --coverage --detectOpenHandles --forceExit",
     "prepublishOnly": "npm run build",
     "lint-staged": "lint-staged",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "release": "js-release"
   },
   "types": "./dist/index.d.ts",
   "author": "zcong1993",
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^27.0.0",
-    "@types/node": "^16.4.8",
-    "husky": "^7.0.1",
-    "jest": "^27.0.6",
-    "lint-staged": "^11.1.1",
-    "prettier": "^2.3.2",
-    "ts-jest": "^27.0.4",
-    "tslint": "^6.1.3",
-    "tslint-config-airbnb": "^5.11.2",
-    "tslint-config-prettier": "^1.18.0",
-    "typescript": "^4.3.5"
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.1",
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
+    "@zcong/js-release": "^0.2.5",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jest": "^25.2.2",
+    "husky": "^7.0.2",
+    "jest": "^27.3.1",
+    "lint-staged": "^11.2.3",
+    "prettier": "^2.4.1",
+    "ts-jest": "^27.0.7",
+    "typescript": "^4.4.4"
   },
   "jest": {
-    "testEnvironment": "node",
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
+    "preset": "ts-jest"
   },
   "lint-staged": {
-    "*.{js,json,ts}": [
-      "yarn format",
-      "git add ."
-    ]
+    "*.{js,json,ts,md}": "prettier --write"
+  },
+  "bugs": "https://github.com/zcong1993/singleflight/issues",
+  "homepage": "https://github.com/zcong1993/singleflight",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zcong1993/singleflight.git"
   }
 }
