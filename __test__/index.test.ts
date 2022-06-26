@@ -1,9 +1,10 @@
+import { vi } from 'vitest'
 import { Singleflight } from '../src'
 
 it('should work well', async () => {
   const mockRes = 'mock res'
-  const fn = jest.fn().mockResolvedValue(mockRes)
-  const fnSync = jest.fn().mockReturnValue(mockRes)
+  const fn = vi.fn().mockResolvedValue(mockRes)
+  const fnSync = vi.fn().mockReturnValue(mockRes)
 
   const sf = new Singleflight()
 
@@ -24,8 +25,8 @@ it('should work well', async () => {
 
 it('all should got error', async () => {
   const mockErr = new Error('mock error')
-  const fn = jest.fn().mockRejectedValue(mockErr)
-  const fnSync = jest.fn().mockImplementation(() => {
+  const fn = vi.fn().mockRejectedValue(mockErr)
+  const fnSync = vi.fn().mockImplementation(() => {
     throw mockErr
   })
 
@@ -48,8 +49,8 @@ it('all should got error', async () => {
 
 it('doWithFresh should works well', async () => {
   const mockRes = 'mock res'
-  const fn = jest.fn().mockResolvedValue(mockRes)
-  const fnSync = jest.fn().mockReturnValue(mockRes)
+  const fn = vi.fn().mockResolvedValue(mockRes)
+  const fnSync = vi.fn().mockReturnValue(mockRes)
 
   const sf = new Singleflight()
 
@@ -82,8 +83,8 @@ it('doWithFresh should works well', async () => {
 
 it('symbol key should work well', async () => {
   const mockRes = 'mock res'
-  const fn = jest.fn().mockResolvedValue(mockRes)
-  const fnSync = jest.fn().mockReturnValue(mockRes)
+  const fn = vi.fn().mockResolvedValue(mockRes)
+  const fnSync = vi.fn().mockReturnValue(mockRes)
 
   const sf = new Singleflight()
 
