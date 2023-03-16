@@ -5,7 +5,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^5.1.0
   '@typescript-eslint/parser': ^5.1.0
   '@zcong/js-release': ^0.2.5
-  bumpp: ^8.2.1
+  bumpp: ^9.0.0
   c8: ^7.11.3
   eslint: ^8.0.1
   eslint-config-prettier: ^8.3.0
@@ -21,7 +21,7 @@ devDependencies:
   '@typescript-eslint/eslint-plugin': 5.1.0_lq7j3lj2wumzvw6ikqpe2lk2j4
   '@typescript-eslint/parser': 5.1.0_3v2go67lchf3wpt5xuas5ea53u
   '@zcong/js-release': 0.2.5
-  bumpp: 8.2.1
+  bumpp: 9.0.0
   c8: 7.11.3
   eslint: 8.0.1
   eslint-config-prettier: 8.3.0_eslint@8.0.1
@@ -269,7 +269,7 @@ packages:
       debug: 4.3.4
       globby: 11.0.4
       is-glob: 4.0.3
-      semver: 7.3.5
+      semver: 7.3.8
       tsutils: 3.21.0_typescript@4.4.4
       typescript: 4.4.4
     transitivePeerDependencies:
@@ -450,17 +450,16 @@ packages:
       fill-range: 7.0.1
     dev: true
 
-  /bumpp/8.2.1:
-    resolution: {integrity: sha512-4tHKsWC2mqHQvdjZ4AXgVhS2xMsz8qQ4zYt87vGRXW5tqAjrYa/UJqy7s/dGYI2OIe9ghBdiFhKpyKEX9SXffg==}
+  /bumpp/9.0.0:
+    resolution: {integrity: sha512-I2+JLFQin46NioHg6wi23hYQMVExiJyGblARp5fIHUzLv3rRz9me38eUe2xlQCAl7Ys9X+SlhTaIkttTxiL6cQ==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
       '@jsdevtools/ez-spawn': 3.0.4
-      cac: 6.7.12
-      fast-glob: 3.2.11
-      kleur: 4.1.4
+      cac: 6.7.14
+      fast-glob: 3.2.12
       prompts: 2.4.2
-      semver: 7.3.5
+      semver: 7.3.8
     dev: true
 
   /bundle-require/3.0.4_esbuild@0.14.47:
@@ -494,6 +493,11 @@ packages:
 
   /cac/6.7.12:
     resolution: {integrity: sha512-rM7E2ygtMkJqD9c7WnFU6fruFcN3xe4FM5yUmgxhZzIKJk4uHl9U/fhwdajGFQbQuv43FAUo1Fe8gX/oIKDeSA==}
+    engines: {node: '>=8'}
+    dev: true
+
+  /cac/6.7.14:
+    resolution: {integrity: sha512-b6Ilus+c3RrdDk+JhLKUAQfzzgLEPy6wcXqS7f/xe1EETvsDP6GORG7SFuOs6cID5YkqchW/LXZbX5bc8j7ZcQ==}
     engines: {node: '>=8'}
     dev: true
 
@@ -1308,20 +1312,9 @@ packages:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
     dev: true
 
-  /fast-glob/3.2.11:
-    resolution: {integrity: sha512-xrO3+1bxSo3ZVHAnqzyuewYT6aMFHRAd4Kcs92MAonjwQZLsK9d0SF1IyQ3k5PoirxTW0Oe/RqFgMQ6TcNE5Ew==}
+  /fast-glob/3.2.12:
+    resolution: {integrity: sha512-DVj4CQIYYow0BlaelwK1pHl5n5cRSJfM60UA0zK891sVInoPri2Ekj7+e1CT3/3qxXenpI+nBBmQAcJPJgaj4w==}
     engines: {node: '>=8.6.0'}
-    dependencies:
-      '@nodelib/fs.stat': 2.0.5
-      '@nodelib/fs.walk': 1.2.8
-      glob-parent: 5.1.2
-      merge2: 1.4.1
-      micromatch: 4.0.5
-    dev: true
-
-  /fast-glob/3.2.7:
-    resolution: {integrity: sha512-rYGMRwip6lUMvYD3BTScMwT1HtAs2d71SMv66Vrxs0IekGZEjhM0pcMfjQPnknBt2zeCwQMEupiN02ZP4DiT1Q==}
-    engines: {node: '>=8'}
     dependencies:
       '@nodelib/fs.stat': 2.0.5
       '@nodelib/fs.walk': 1.2.8
@@ -1530,7 +1523,7 @@ packages:
     dependencies:
       array-union: 2.1.0
       dir-glob: 3.0.1
-      fast-glob: 3.2.7
+      fast-glob: 3.2.12
       ignore: 5.1.8
       merge2: 1.4.1
       slash: 3.0.0
@@ -1809,11 +1802,6 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /kleur/4.1.4:
-    resolution: {integrity: sha512-8QADVssbrFjivHWQU7KkMgptGTl6WAcSdlbBPY4uNF+mWr6DGcKrvY2w4FQJoXch7+fKMjj0dRrL75vk3k23OA==}
-    engines: {node: '>=6'}
-    dev: true
-
   /levn/0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
@@ -2085,7 +2073,7 @@ packages:
     dependencies:
       hosted-git-info: 4.0.2
       is-core-module: 2.9.0
-      semver: 7.3.5
+      semver: 7.3.8
       validate-npm-package-license: 3.0.4
     dev: true
 
@@ -2545,6 +2533,14 @@ packages:
 
   /semver/7.3.5:
     resolution: {integrity: sha512-PoeGJYh8HK4BTO/a9Tf6ZG3veo/A7ZVsYrSA6J8ny9nb3B1VrpkuN+z9OE5wfE5p6H4LchYZsegiQgbJD94ZFQ==}
+    engines: {node: '>=10'}
+    hasBin: true
+    dependencies:
+      lru-cache: 6.0.0
+    dev: true
+
+  /semver/7.3.8:
+    resolution: {integrity: sha512-NB1ctGL5rlHrPJtFDVIVzTyQylMLu9N9VICA6HSFJo8MCGVTMW6gfpicwKmmK/dAjTOrqu5l63JJOpDSrAis3A==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
